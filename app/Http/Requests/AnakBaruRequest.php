@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Requests;
+
+use App\Services\AturanIsian;
+use Illuminate\Foundation\Http\FormRequest;
+
+class AnakBaruRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function rules(): array
+    {
+        $sesi = $this->session()->get('pendaftaran_baru');
+
+        if (! is_array($sesi) || empty($sesi['sekolah_id'])) {
+            return [];
+        }
+
+        return app(AturanIsian::class)->aturanValidasi((int) $sesi['sekolah_id'], 'identitas');
+    }
+}

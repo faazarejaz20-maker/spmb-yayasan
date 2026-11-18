@@ -1,0 +1,152 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/plus-jakarta-sans';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+
+    --color-primer: #0f766e;
+    --color-primer-gelap: #115e59;
+    --color-aksen: #d4a017;
+    --color-latar: #f8faf9;
+    --color-kartu: #ffffff;
+    --color-teks: #1f2937;
+    --color-teks-sekunder: #6b7280;
+    --color-garis: #e5e7eb;
+    --color-bahaya: #b91c1c;
+
+    --color-sekolah-tkk: #f97316;
+    --color-sekolah-tki: #14b8a6;
+    --color-sekolah-sd: #2563eb;
+    --color-sekolah-smp: #4338ca;
+}
+
+:root {
+    --primer: #0f766e;
+    --primer-gelap: #115e59;
+    --aksen: #d4a017;
+    --latar: #f8faf9;
+    --kartu: #ffffff;
+    --teks: #1f2937;
+    --teks-sekunder: #6b7280;
+    --garis: #e5e7eb;
+    --bahaya: #b91c1c;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* Pola geometris sangat halus, hanya untuk latar hero beranda (docs/desain.md). */
+.pola-hero {
+    background-image:
+        radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.10) 1px, transparent 0),
+        radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.06) 1px, transparent 0);
+    background-size: 32px 32px, 56px 56px;
+    background-position: 0 0, 16px 16px;
+}
+
+/* Batang kemajuan memakai elemen <progress> agar tidak perlu gaya inline
+   (CSP `style-src 'self'`). */
+progress.kemajuan,
+progress.kemajuan-formulir {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 0.5rem;
+    border: 0;
+    border-radius: 9999px;
+    overflow: hidden;
+    background-color: #e5e7eb;
+    color: var(--primer);
+    vertical-align: middle;
+}
+
+progress.kemajuan::-webkit-progress-bar,
+progress.kemajuan-formulir::-webkit-progress-bar {
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+}
+
+progress.kemajuan::-webkit-progress-value,
+progress.kemajuan-formulir::-webkit-progress-value {
+    background-color: var(--primer);
+    border-radius: 9999px;
+}
+
+progress.kemajuan::-moz-progress-bar,
+progress.kemajuan-formulir::-moz-progress-bar {
+    background-color: var(--primer);
+    border-radius: 9999px;
+}
+
+/* Kolom pilih berkas (input file) pada panel: tombol bawaan browser
+   diberi warna primer agar seragam dengan tombol lain. */
+.pilih-berkas {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--garis);
+    border-radius: 0.75rem;
+    background-color: #fff;
+    padding: 0.375rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    color: var(--teks-sekunder);
+    cursor: pointer;
+}
+
+.pilih-berkas::file-selector-button {
+    margin-right: 0.75rem;
+    border: 0;
+    border-radius: 0.6rem;
+    background-color: var(--primer);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+
+.pilih-berkas:hover::file-selector-button {
+    background-color: var(--primer-gelap);
+}
+
+/* Fokus terlihat jelas untuk pengguna keyboard. */
+:focus-visible {
+    outline: 3px solid var(--aksen);
+    outline-offset: 2px;
+}
+
+/* Aturan cetak dipindah dari <style> inline di layouts/cetak agar CSP
+   `style-src 'self'` tidak dilanggar. */
+@page {
+    size: A4;
+    margin: 15mm;
+}
+
+@media print {
+    .tanpa-cetak {
+        display: none !important;
+    }
+
+    body {
+        background: #fff !important;
+    }
+}
+
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--latar);
+    color: var(--teks);
+    font-size: 16px;
+}
